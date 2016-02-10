@@ -3,28 +3,25 @@
 /**
 * 
 */
-class model1
+class model1 extends FuncDB 
 {
-	var $table = "table";
 
-	function getRecette($id) {
+	function getNameRecette() {
 	$dbh = new PDO('mysql:host=localhost;dbname=Marmiton', 'root', 'root');
-	$array = array();
-    $sql =  'SELECT * FROM Recette';
 
-    if(!empty($id)){
-    	$sql .= ' WHERE id ='.$id;
-    }
-
-    foreach($dbh->query($sql) as $row) {
-    	$array[$row['id']]['id'] = $row['id'];
-        $array[$row['id']]['nom'] = $row['nom'];
-        $array[$row['id']]['suivi'] = $row['suivi'];
-        $array[$row['id']]['ingredients'] = $row['ingredients'];
-        $array[$row['id']]['mail'] = $row['mail'];
-        $array[$row['id']]['pseudo'] = $row['pseudo'];
-    }
-    return($array);
+    $json = $this->select($dbh, 'Recette', array('nom', 'id'), array(), array());
+    
+    // echo $json;
+    return($json);
   }
+
+    function getRecette($id) {
+        $dbh = new PDO('mysql:host=localhost;dbname=Marmiton', 'root', 'root');
+
+        $json = $this->select($dbh, 'Recette', array(), array("id = ".$id), array());
+    
+        // echo $json;
+        return($json);
+    }
 }
 ?>

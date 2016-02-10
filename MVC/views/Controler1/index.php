@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Titre</title>
-    </head>
-    <body>
-    	<?php foreach ($sql as $key => $value) { ?>
-    	<a href="<?php echo WEBROOT; ?>controler1/view/<?php echo $value['id']; ?> "> <?php echo($value['nom'])?> </a><br/>
-    	<?php } ?>
-    </body>
-</html>
+<?php 
+for ($i = 0; isset($nom[$i]); $i++) { ?>
+	<a href="<?php echo WEBROOT; ?>controler1/view/<?php echo $id[$i]; ?> "> <?php echo($nom[$i])?> </a><br/>
+<?php } ?>

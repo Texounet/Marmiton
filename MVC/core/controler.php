@@ -1,20 +1,10 @@
 <?php
-	/**
-	* 
-	*/
-	/**
-	* 
-	*/
+
 	class Controler
 	{
 
 		var $vars = array();
 		var $layout = 'default';
-		
-		function __construct()
-		{
-			# code...
-		}
 
 		//function permettant d'appeler la vue
 		function render($filename){
@@ -31,7 +21,6 @@
 			}
 
 		}
-
 
 		//function pour passer des valeurs
 		function set($d){
