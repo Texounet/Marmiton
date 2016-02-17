@@ -25,11 +25,11 @@
 						<label>Quantiter</label>
 					</td>
 					<td>
-						<input type="quantiter"></input>
+						<input type="number" id="quantite" />
 					</td>
 				</tr>
 			</table>
-			<input type="button" value="Ajouter Ingredients" onClick="liste(list)" ></input>		
+			<input type="button" value="Ajouter Ingredients" onClick="liste()" min="0"></input>		
 		</div>
 	</div>
 
