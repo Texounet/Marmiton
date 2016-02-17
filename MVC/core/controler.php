@@ -11,8 +11,10 @@
 			extract($this->vars);
 
 			ob_start();
+
+			$controler = get_class($this);
 			//on appel la vue
-			require(ROOT.'views/'.get_class($this).'/'.$filename.'.php');
+			require(ROOT.'views/'.$controler.'/'.$filename.'.php');
 			$content_for_layout = ob_get_clean();
 			if($this->layout==false){
 				echo $content_for_layout;

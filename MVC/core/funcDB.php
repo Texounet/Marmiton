@@ -6,6 +6,7 @@ class FuncDB
 	function select($dbh ,$table, $array_select, $array_where, $array_groupe){
 		$where = '';
 		$groupe = '';
+		$json = '';
 
 		$requette = "SELECT ";
 
@@ -25,7 +26,6 @@ class FuncDB
 		while( $resultat = $resultats->fetchAll(PDO::FETCH_ASSOC) ){
 			$json = json_encode($resultat);
 		}
-		echo $requette;
 		return $json;
 	}
 
