@@ -5,6 +5,7 @@
 */
 class ModelRecette extends funcDB
 {
+
 	function getIngredient() {
         $dbh = new PDO('mysql:host=localhost;dbname=Marmiton', 'root', 'root');
 

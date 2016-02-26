@@ -109,7 +109,6 @@ class controlerRecette extends Controler
 		}
 
 		//Ajout des tag
-
 		for ($i=0; isset($table['Base']['tag'][$i]) ; $i++) { 
 			$this->ModelRecette->insertTag($table['Base']['tag'][$i], $id);
 		}

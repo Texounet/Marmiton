@@ -17,7 +17,7 @@ class controlerView extends Controler
 		$etape = $array['etape'];
 
 		$d['recette'] = $array['recette'];
-
+		$d['tag'] = $array['tag'];
 		for ($i=0; isset($ing[$i]) ; $i++) { 
 			$d['ing'][$i] = $ing[$i];
 			// print_r($d['ing'][$i]);
@@ -33,7 +33,7 @@ class controlerView extends Controler
 		}
 
 		$this->set($d);
-		$this->render('view');		
+		$this->render('view');
 	}
 }
 ?>
