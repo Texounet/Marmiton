@@ -22,20 +22,5 @@ class Controler1 extends Controler
 		$this->set($d);
 		$this->render('index');
 	}
-
-	function view($id){
-		$d =array();
-		$this->loadModel('Model1');
-		$result = $this->Model1->getRecette($id);
-		$array = json_decode($result, true);
-		// print_r($array);
-		for ($i=0; isset($array[$i]); $i++) { 
-			// echo($array[$i]['nom']);
-			$d['recette'][$i] = $array[$i];
-		}
-		$this->set($d);
-
-		$this->render('recette');
-	}
 }
 ?>
