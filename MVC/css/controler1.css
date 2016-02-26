@@ -1,0 +1,20 @@
+.index{
+	color: black;
+	text-align: center;
+
+}
+
+.div_index{
+	margin-top: 10px;
+	margin-left: auto;
+  	margin-right: auto;	
+	width: 80%;
+	border: 1px solid black;
+}
+
+.div_add{
+	margin-top: 10px;
+	margin-left: auto;
+  	margin-right: auto;	
+  	text-align: center;
+}

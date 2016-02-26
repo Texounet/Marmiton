@@ -9,8 +9,7 @@ class ModelRecette extends funcDB
         $dbh = new PDO('mysql:host=localhost;dbname=Marmiton', 'root', 'root');
 
         $json = $this->select($dbh, 'Ingredients', array(), array(), array());
-    
-         // echo $json;
+
         return($json);
     }
 
@@ -18,16 +17,17 @@ class ModelRecette extends funcDB
         $dbh = new PDO('mysql:host=localhost;dbname=Marmiton', 'root', 'root');
 
         $json = $this->select($dbh, 'Recette', array(), array("id = ".$id), array());
-    
-        // echo $json;
+
         return($json);
     }
 
     function insertRecette($nom, $temps, $mail, $pseudo){
         $dbh = new PDO('mysql:host=localhost;dbname=Marmiton', 'root', 'root');
 
+        $date = date('Y-m-d H:i:s');
+
         //insertioon dans la table recette
-        $insert_recette = "INSERT INTO `Recette`(`nom`, `temps`, `mail`, `pseudo`) VALUES ('".$nom."','".$temps."','".$mail."','".$pseudo."')";
+        $insert_recette = "INSERT INTO `Recette`(`nom`, `temps`, `mail`, `pseudo`, `date`) VALUES ('".$nom."','".$temps."','".$mail."','".$pseudo."', '".$date."')";
         $dbh->exec($insert_recette);
 
         //recuperation de l'id
@@ -40,22 +40,31 @@ class ModelRecette extends funcDB
         return($id);
     }
 
-    function insertIngredient($id, $ing, $type){
+    function insertIngredient($id, $ing, $type, $quantiter){
         $dbh = new PDO('mysql:host=localhost;dbname=Marmiton', 'root', 'root');
 
         //insertioon dans la table recette
-        $insert_recette = "INSERT INTO `Ingredients`(`ingredients`, `type`, `id_rec`) VALUES ('".$ing."','".$type."','".$id."')";
+        $insert_ing = "INSERT INTO `Ingredients`(`ingredients`, `type`, `id_rec`, `quantiter`) VALUES ('".$ing."','".$type."','".$id."', '".$quantiter."')";
 
-        $dbh->exec($insert_recette);
+        $dbh->exec($insert_ing);
     }
 
     function insertEtape($id, $nom, $desc, $table){
         $dbh = new PDO('mysql:host=localhost;dbname=Marmiton', 'root', 'root');
 
         //insertioon dans la table recette
-        $insert_recette = "INSERT INTO `Etape`(`id_recette`, `nom`, `description`, `ingredients`) VALUES ('".$id."','".$nom."','".$desc."','".$table."')";
+        $insert_etape = "INSERT INTO `Etape`(`id_recette`, `nom`, `description`, `ingredients`) VALUES ('".$id."','".$nom."','".$desc."','".$table."')";
 
-        $dbh->exec($insert_recette);
+        $dbh->exec($insert_etape);
+    }
+
+    function insertTag($tag, $id){
+        $dbh = new PDO('mysql:host=localhost;dbname=Marmiton', 'root', 'root');
+
+        //insertioon dans la table recette
+        $insert_tag = "INSERT INTO `Tag`(`tag`, `id_recette`) VALUES ('".$tag."','".$id."')";
+
+        $dbh->exec($insert_tag);
     }
 }
 ?>

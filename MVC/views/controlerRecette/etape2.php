@@ -1,13 +1,8 @@
 <?php
 
-echo $var;
-// echo $var;
+// print_r($_POST);
 $test = json_decode($var, true);
-// print_r($test);
 
-for ($i=0; isset($test[$i]) ; $i++) { 
-	echo $test[$i]['nom']."<br/>";
-}
 ?>
 
 

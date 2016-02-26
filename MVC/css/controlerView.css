@@ -1,0 +1,63 @@
+.contain{
+	width: 100%;
+}
+
+.name{
+	width: 80%;
+	margin-left	: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	font-size: 25px;
+	text-align: center;
+}
+
+.infog{
+	width: 80%;
+	margin-left	: auto;
+	margin-right: auto;
+	margin-top: 20px; 
+}
+
+.ingredient{
+	width: 80%;
+	margin-left	: auto;
+	margin-right: auto;
+	margin-top: 20px; 
+}
+
+.title_ingredient{
+	width: 80%;
+	margin-left	: auto;
+	margin-right: auto;
+	margin-top: 20px; 
+	text-align: center;
+	font-size: 25px;
+}
+
+.contain_ingredient{
+	width: 100%;
+	margin-left	: auto;
+	margin-right: auto;
+}
+
+.p2{
+	display: inline-block;
+}
+
+.etape2	{
+	width: 80%;
+	margin-left	: auto;
+	margin-right: auto;
+	border: 1px solid black;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.title_etape {
+	width: 100%;
+	text-align: center;
+}
+
+.decal{
+	margin-left: 10px;
+}

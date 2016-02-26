@@ -9,15 +9,6 @@ class controlerRecette extends Controler
 	function index()
 	{
 
-		$this->loadModel('ModelRecette');
-		$result = $this->ModelRecette->getIngredient('');
-		$array = json_decode($result, true);
-		// print_r($array);
-		for ($i=0; isset($array[$i]); $i++) { 
-			$d['ingredients'][$i] = $array[$i]['ingredients'];
-			$d['id'][$i] = $array[$i]['id'];
-		}
-		$this->set($d);
 		$this->render('index');
 	}
 
@@ -26,9 +17,7 @@ class controlerRecette extends Controler
 		$this->loadModel('ModelRecette');
 		$result = $this->Model1->getRecette($id);
 		$array = json_decode($result, true);
-		// print_r($array);
 		for ($i=0; isset($array[$i]); $i++) { 
-			// echo($array[$i]['nom']);
 			$d['recette'][$i] = $array[$i];
 		}
 		$this->set($d);
@@ -36,28 +25,31 @@ class controlerRecette extends Controler
 		$this->render('recette');
 	}
 
+	function etape0(){
+		// print_r($_POST);
+		//Recuperartion de l'etape 1
+		$nom = $_POST['name'];
+		$temps = $_POST['temps'];
+		$createur = $_POST['createur'];
+		$mail = $_POST['mail'];
+		$test = $_POST['ing'];
+		$ingredients = array();
+		for($i=0; isset($test[$i]); $i++){
+			$ex = explode('_', $test[$i]);
+			$ing = array('nom' => $ex[0], 'type' => $ex[1], 'quantiter' => 0);
+			array_push($ingredients, $ing);
+		}
+
+		$debut = array('Base' => array('nom' => $nom,'createur' => $createur, 'tmp' => $temps, 'mail' => $mail, 'ingredients' => $ingredients, 'tag' => $_POST['tag']));
+		$json = json_encode($debut);
+		// echo $json;
+		$d['var'] = $json;
+		$this->set($d);
+		$this->render('etape2');
+	}
+
 	function etape1($test, $envoi){
-		if ($test == 'ok') {
-			$json = $envoi;
-		}
-		else{
-			//Recuperartion de l'etape 1
-			$nom = $_POST['name'];
-			$temps = $_POST['temps'];
-			$pseudo = $_POST['pseudo'];
-			$mail = $_POST['mail'];
-			$test = $_POST['ing'];
-			$ingredients = array();
-			for($i=0; isset($test[$i]); $i++){
-				$ex = explode('_', $test[$i]);
-				$ing = array('nom' => $ex[0], 'type' => $ex[1]);
-				array_push($ingredients, $ing);
-			}
-
-			$debut = array('Base' => array('nom' => $nom, 'tmp' => $temps, 'mail' => $mail, 'ingredients' => $ingredients));
-			$json = json_encode($debut);
-		}
-
+		$json = $envoi;
 		$d['var'] = $json;
 		$this->set($d);
 		$this->render('etape2');
@@ -68,6 +60,8 @@ class controlerRecette extends Controler
 		if(isset($_POST['ing']))
 			$ing = $_POST['ing'];
 
+		$tmp = unserialize($_POST['json']);
+
 		for($i=0; isset($ing[$i]); $i++){
 			$tab = array();
 			$array_ing = array();
@@ -77,13 +71,17 @@ class controlerRecette extends Controler
 			$array_ing['quant'] = $tab[2];
 			$array_ing['dose'] = $tab[3];
 			array_push($array, $array_ing);
-		}
-		$tmp = unserialize($_POST['json']);
+			for ($i=0; isset($tmp['Base']['ingredients'][$i]) ; $i++) { 
+				if($array_ing['ing'] == $tmp['Base']['ingredients'][$i]['nom']){
 
+					$tmp['Base']['ingredients'][$i]['quantiter'] += $array_ing['quant'];
+				}
+			}
+		}
 		array_push($tmp, $array);
+
 		$json = json_encode($tmp);
 		// echo $json;
-		// print_r($_POST);
 		if($_POST['suite'] == "Ajouter une etape"){
 			$this->etape1('ok', $json);
 		}
@@ -95,7 +93,7 @@ class controlerRecette extends Controler
 	function etape3($json){
 		$table = json_decode($json, true);
 
-		//QAjoue des info general
+		//Ajout des info general
 		$nom = $table['Base']['nom'];
 		$temps = $table['Base']['tmp'];
 		$mail = $table['Base']['mail'];
@@ -105,14 +103,20 @@ class controlerRecette extends Controler
 
 		$id = $this->ModelRecette->insertRecette($nom, $temps, $mail, $pseudo);
 
-		//Ajoue des ingredients
+		//Ajout des ingredients
 		for($i=0; isset($table['Base']['ingredients'][$i]); $i++){
-			$this->ModelRecette->insertIngredient($id, $table['Base']['ingredients'][$i]['nom'], $table['Base']['ingredients'][$i]['type']);
+			$this->ModelRecette->insertIngredient($id, $table['Base']['ingredients'][$i]['nom'], $table['Base']['ingredients'][$i]['type'], $table['Base']['ingredients'][$i]['quantiter']);
+		}
+
+		//Ajout des tag
+
+		for ($i=0; isset($table['Base']['tag'][$i]) ; $i++) { 
+			$this->ModelRecette->insertTag($table['Base']['tag'][$i], $id);
 		}
 
 		$etape = array_shift($table);
 
-		//Ajoue des etape
+		//Ajout des etape
 		for ($i=0; isset($table[$i]); $i++) { 
 			$nom = $table[$i]['nom'];
 			$desc = $table[$i]['Description'];
@@ -121,6 +125,8 @@ class controlerRecette extends Controler
 
 			$this->ModelRecette->insertEtape($id, $nom, $desc, serialize($table[$i]));
 		}
+
+		
 
 		$this->render('fin');
 	}

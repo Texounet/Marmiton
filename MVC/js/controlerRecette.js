@@ -80,3 +80,12 @@ function choix(){
 	document.getElementById("valide").disabled = false;
 	supTmp("sup");
 }
+
+//Ajouter un ingredient
+function add_tag(){
+	var tag = document.getElementById("tag").value;
+
+	var test = document.getElementById(tag);
+	if(test == null)
+		$("<li id='"+tag+"'>"+tag+"<button onClick='delete_ing("+'"'+tag+'"'+")'>Supprimer</button><input type='hidden' name='tag[]' value='"+tag+"'></input></li>").appendTo($('#list_tag > ul'));
+}

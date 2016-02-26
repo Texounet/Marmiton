@@ -5,8 +5,7 @@
 <div class="content">
 
 	<!-- Ajout des info general -->
-	<?php echo(WEBROOT."formulaire/etape1")?>
-	<form action="<?php echo(WEBROOT."controlerRecette/etape1") ?>" method="post">
+	<form action="<?php echo(WEBROOT."controlerRecette/etape0") ?>" method="post">
 		<div class="contentComposant">
 			<h3 class="title" >Information general</h3>
 			<div>
@@ -19,14 +18,20 @@
 				<label>Votre mail</label>
 				<input type="text" name="mail" id="mail"></input><br/>
 
-				<label>Votre pseudo</label>
-				<input type="text" name="pseudo" id="mail"></input><br/>
-
 				<label>Votre nom utilisateur</label>
 				<input type="text" name="createur" id="utiilisateur"></input><br/>
+
+				<label>Tag</label>
+				<input type="text" id="tag"></input><br/>
+				<input type="button" value="Ajouter Ingredients" onClick="add_tag()"></input>
+				<div id="list_tag">
+					<ul>
+
+			    	</ul>
+				</div>
+
 			</div>
 		</div>
-
 
 		<!-- Ajout des ingredients -->
 
