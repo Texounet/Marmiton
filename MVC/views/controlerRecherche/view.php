@@ -12,6 +12,6 @@ for ($i = 0; isset($nom[$i]); $i++) { ?>
 <?php } ?>
 
 <div class="div_add">
-	
+	<a class="btn btn-primary" class="add" href="<?php echo WEBROOT; ?>controlerRecette/index">Ajouter une recette</a>
 </div>
 	

@@ -15,6 +15,7 @@
 		    <div class="navbar-header">
 		      <a class="navbar-brand" href="<?php echo(WEBROOT) ?>controler1/index">Marmitton</a>
               <a class="navbar-brand" href="<?php echo(WEBROOT) ?>controlerRecherche/index">Recherche</a>
+              <a class="navbar-brand" class="add" href="<?php echo WEBROOT; ?>controlerRecette/index">Ajouter une recette</a>
 		    </div>
 
 		    <!-- Collect the nav links, forms, and other content for toggling -->

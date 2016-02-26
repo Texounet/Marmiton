@@ -28,6 +28,7 @@ class controlerRecette extends Controler
 	function etape0(){
 		// print_r($_POST);
 		//Recuperartion de l'etape 1
+		if()
 		$nom = $_POST['name'];
 		$temps = $_POST['temps'];
 		$createur = $_POST['createur'];

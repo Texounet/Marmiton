@@ -32,6 +32,10 @@ class controlerView extends Controler
 			$d['etape'][$i]['ingredients'] = $ingred;
 		}
 
+		$this->loadModel('ModelCom');
+		$result = $this->ModelCom->get_com($id);
+		$d['com'] = $result;
+
 		$this->set($d);
 		$this->render('view');
 	}
