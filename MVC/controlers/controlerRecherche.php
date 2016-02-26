@@ -15,7 +15,7 @@ class controlerRecherche extends Controler
 
 		array_push($array_recette, $_POST['name']);
 		array_push($array_recette, $_POST['tmp_min']);
-		array_push($array_recette, $_POST['tmp_min']);
+		array_push($array_recette, $_POST['tmp_max']);
 		array_push($array_recette, $_POST['pseudo']);
 
 
